@@ -1,0 +1,98 @@
+{% extends 'main/base.html' %}
+{% load static %}
+
+{% block content %}
+{% if is_client == True%}
+<div class="container m-sm-auto">
+    <section class="row align-items-center step">
+        <div class="col-sm-12 col-md-6 col-sm-12">
+            <div class="item-img">
+                <img src="{% static 'img/team2.jpg'%}" alt="Mobirise">
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-sm-12">
+            <div class="text-wrapper">
+                <h1 class="col">U r welcome, {{user.username}}</h1>
+
+                <h3 for="passport" class="h3">Паспорт</h3>
+                <span id="passport" class="">{{user.profile.passport}}</span>
+                <h3 for="phone" class="h3">Контактный номер</h3>
+                <span id="phone" class="">{{user.profile.phone}}</span>
+                <h3 for="name" class="h3">Имя</h3>
+                <span id="name" class="">{{user.get_full_name}}</span>
+            </div>
+        </div>
+    </section>
+    {% else%}
+    <section class="row align-items-center step">
+        <div class="col-sm-12 col-md-6 col-sm-12">
+            <div class="item-img">
+                <img src="{% static 'img/team3.jpg'%}" alt="Mobirise">
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-sm-12">
+            <div class="text-wrapper">
+                <h1 class="col">Здравствуйте, преподаватель, {{user.username}}</h1>
+                <h3 for="passport" class="h3">Документ об образовании</h3>
+                <span id="passport" class="">{{user.teacher_profile.education_certificate}}</span>
+                <h3 for="phone" class="h3">Домашний адрес</h3>
+                <span id="phone" class="">{{user.teacher_profile.home}}</span>
+                <h3 class="h3">Профессия</h3>
+                <span id="phone" class="">{{user.teacher_profile.profession}}</span>
+                <h3 for="name" class="h3">Имя</h3>
+                <span id="name" class="">{{user.get_full_name}}</span>
+            </div>
+        </div>
+    </section>
+{% endif %}
+    <section id="style" class="row step mb-5">
+        <h1 class="h1 text-center mb-5">Танцевальные направления</h1>
+
+        <div class="card m-sm-auto сol-sm-12 col-md-6 col-lg-3">
+            {% for style in styles %}
+            <h4 class="card-header">{{style.name}}</h4>
+            <div class="card-body">
+                <p>{{style.description}}</p>
+                <p>{{style.teacher}}</p>
+            </div>
+            {% endfor %}
+        </div>
+
+    </section>
+        <section id="timetable" class="row align-content-center step">
+            <h1 class="h1 text-center mb-5">Расписание</h1>
+            {% for style in styles %}
+                {% for lesson in style.schedule_set.all %}
+            <div class="step step2">
+                <div class="card m-sm-auto сol-sm-12 col-md-6 col-lg-5">
+                <div class="card-header text-center">
+                    <h3 class="h3">{{lesson.style}}</h3>
+                </div>
+                <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                        <p>{{lesson.weekday}}</p>
+                        <footer class="blockquote-footer">{{lesson.time}}</footer>
+                    </blockquote>
+                </div>
+            </div>
+            </div>
+                {% endfor %}
+            {% endfor %}
+        </section>
+    {% if is_client == True %}
+    <div class="row justify-content-center mb-5 step" id="payment">
+        <h1 class="h1 text-center mb-5">Оплата услуг</h1>
+        <div class="col-md-12 col-lg-10">
+            <hr class="line">
+
+                <p class="text-center">Для оплаты определенного курса нажмите <a href="{% url 'pay' %}" class="text-primary"><i>здесь</i></a>.</p>
+            <hr class="line">
+    {% endif %}
+            <div class="text-center mb-5">
+            <a href="{% url 'logout' %}" class="lead text-center">Выйти</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

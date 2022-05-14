@@ -1,0 +1,31 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+<div class="month mt-5">
+    <ul>
+        <li class="h1 step">Расписание занятий<br><span class="h3">2021</span></li>
+    </ul>
+</div>
+
+<div class="container step step2" id="calendar">
+    <ul class="weekdays bg-dark">
+        <li class="h3">Расписание</li>
+    </ul>
+    <ul class="days bg-light">
+
+         {% for day in schedules %}
+             {% if day.weekday != today %}
+             <li class="h5">
+                <h3>{{ day.style.name }}<br>
+                </h3>
+                    {{ day.weekday }} [{{ day.time }}]
+            </li>
+                 {% else %}
+                 <li class="h5"><span class="active">{{ day.style.name }}
+                    {{ day.weekday }} [{{ day.time }}]</span></li>
+             {% endif %}
+        {% endfor %}
+    </ul>
+
+</div>
+{% endblock %}

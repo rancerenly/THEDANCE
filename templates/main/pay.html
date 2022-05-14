@@ -1,0 +1,48 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+
+    {% if user.is_authenticated %}
+    <form class="row g-3 m-5" method="POST">
+        {% csrf_token %}
+        <div>Платеж</div>
+        <div class="col-12">
+            <label for="{{ form.lessons.id_for_label }}" class="form-label"> Выбор стиля </label>
+            <div class="col-md-6">
+            {{ form.lessons }}
+            </div>
+        </div>
+        <div class="col-12">
+            <label for="{{ form.count_of_lessons.id_for_label }}" class="form-label"> Количество занятий </label>
+            <div class="col-md-6">
+            {{ form.count_of_lessons }}
+            </div>
+        </div>
+        <div class="col-12">
+            <label for="{{ form.cost.id_for_label }}" class="form-label"> Сумма платежа </label>
+            <div class="col-md-6">
+            {{ form.cost }}
+            </div>
+        </div>
+        <div class="col-6">
+            <label for="{{ form.payment_date.id_for_label }}" class="form-label"> Дата платежа</label>
+            <div>
+                {{ form.payment_date.id_for_label }}
+            </div>
+        <script type="text/javascript">
+            document.write(Date());
+        </script>
+            {% if error_message %}
+            <p class="bg-danger p-d ml-b">{{ error_message }}</p>
+        {% endif %}
+        </div>
+    <div class="col-12 m-3">
+        <button type="submit" class="btn btn-outline-primary">Оплатить</button>
+
+    </div>
+    </form>
+    {% else %}
+        <div> <h1> Вы не авторизированы! </h1> </div>
+    {% endif %}
+
+{% endblock %}

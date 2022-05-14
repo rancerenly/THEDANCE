@@ -1,0 +1,25 @@
+{% extends 'main/base.html' %}
+{% block content %}
+
+<div class="p-5 row">
+    {% if not user.is_authenticated %}
+    <div class="col-6 p-3" id="client">
+        <p class="h3 text-center">Вход</p>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Sign in</button>
+        </form>
+        <div class="text-center mb-5">
+            <a href="{% url 'register' %}" class="lead text-center">Ещё не зарегистрированы?! Тогда вам сюда.</a>
+        </div>
+    </div>
+    {% else %}
+    <p class="h3 text-center">Вы уже авторизованы, {{ user.username }}!</p>
+    <div class="text-center mb-5">
+        <a href="{% url 'logout' %}" class="lead text-center">Выйти</a>
+    </div>
+    {% endif %}
+</div>
+
+{% endblock %}

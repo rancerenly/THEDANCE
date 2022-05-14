@@ -1,0 +1,64 @@
+{% extends 'main/base.html' %}
+{% block content %}
+    <form class="row g-3 m-5" method="POST">
+    {% csrf_token %}
+        <div>Регистрация</div>
+        <div class="panel-body">
+            {% if error_message %}
+                <p class="bg-danger p-d ml-b">{{ error_message }}</p>
+            {% endif %}
+        </div>
+    <div class="col-12">
+        <label for="{{ form.username.id_for_label }}" class="form-label">Username</label>
+        <div class="col-md-6">
+            {{ form.username }}
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="{{ form.password.id_for_label }}" class="form-label">Пароль</label>
+        <div class="col-md-6">
+            {{ form.password }}
+        </div>
+    </div>
+    <div class="col-6">
+        <label for="{{ form.password_repeat.id_for_label }}" class="form-label">Повторите пароль</label>
+        <div class="col-md-6">
+            {{ form.password_repeat }}
+        </div>
+    </div>
+    <div class="col-md-6">
+        <label for="{{ form.phone.id_for_label }}" class="form-label">Телефон</label>
+        <div class="col-md-6">
+            {{ form.phone }}
+        </div>
+    </div>
+
+    <div class="col-6">
+        <label for="{{ form.first_name.id_for_label }}" class="form-label">Имя</label>
+        <div class="col-md-6">
+            {{ form.first_name }}
+        </div>
+    </div>
+    <div class="col-6">
+        <label for="{{ form.last_name.id_for_label }}" class="form-label">Фамилия</label>
+        <div class="col-md-6">
+            {{ form.last_name }}
+        </div>
+    </div>
+    <div class="col-6">
+        <label for="{{ form.passport.id_for_label }}" class="form-label">Паспорт</label>
+        <div class="col-md-6">
+            {{ form.passport }}
+        </div>
+    </div>
+    <div class="col-6">
+        <label for="{{ form.email.id_for_label }}" class="form-label">Email</label>
+        <div class="col-md-6">
+            {{ form.email }}
+        </div>
+    </div>
+    <div class="col-12 m-3">
+        <button type="submit" class="btn btn-outline-primary">Зарегистрироваться</button>
+    </div>
+</form>
+{% endblock %}
